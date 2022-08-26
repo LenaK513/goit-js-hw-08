@@ -6,3 +6,7 @@ import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 
 import apiServise from './export';
+
+console.log(galleryItems);
+console.log(SimpleLightbox);
+console.log(apiServise);
