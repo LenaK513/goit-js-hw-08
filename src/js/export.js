@@ -1,3 +1,5 @@
+import { galleryItems } from './gallery-items';
+
 const listOfElements = galleryItem => {
   return `
 <div class="gallery__item">
