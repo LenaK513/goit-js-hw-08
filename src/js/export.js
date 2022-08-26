@@ -12,7 +12,7 @@ const listOfImages = galleryItems.map(listOfElements).join('');
 
 const gallery = document.querySelector('.gallery');
 
-gallery.insertAdjacentHTML('beforeend', listOfImages);
+const galleryNew = gallery.insertAdjacentHTML('beforeend', listOfImages);
 
 const lightbox = new SimpleLightbox('.gallery a', {
   captionsData: 'alt',
@@ -24,5 +24,6 @@ export default {
   listOfElements,
   listOfImages,
   gallery,
+  galleryNew,
   lightbox,
 };
