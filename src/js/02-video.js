@@ -15,21 +15,8 @@ player.getVideoTitle().then(function (title) {
 
 const timeSaved = localStorage.getItem('videoplayer-current-time');
 
-player
-  .setCurrentTime(timeSaved)
-  .then(function (seconds) {
-    console.log(seconds);
-  })
-  .catch(function (error) {
-    switch (error.name) {
-      case 'RangeError':
-        // the time was less than 0 or greater than the video’s duration
-        break;
-
-      default:
-        // some other error occurred
-        break;
-    }
-  });
+if (timeSaved) {
+  player.setCurrentTime(timeSaved);
+}
 
 throttle(player.setCurrentTime, 1000);
