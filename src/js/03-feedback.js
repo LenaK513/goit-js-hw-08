@@ -1,7 +1,7 @@
 import throttle from 'lodash.throttle';
 // console.log(throttle);
 
-const dataInput = {};
+let savedInputData = {};
 
 const form = document.querySelector('.feedback-form');
 
@@ -11,21 +11,16 @@ form.addEventListener('submit', onFormSumbit);
 onInputDataExist();
 
 function onInputFormEvents(event) {
-  let savedInputData = localStorage.getItem('feedback-form-state');
+  savedInputData = localStorage.getItem('feedback-form-state');
   if (savedInputData) {
+    ('feedback-form-state');
     savedInputData = JSON.parse(savedInputData);
   } else {
     savedInputData = {};
   }
 
   savedInputData[event.target.name] = event.target.value;
-
-  // localStorage.setItem(
-  //   'feedback-form-statJSON.parse(savedInputData)e',
-  //   JSON.stringify(dataInput)
-  // );
-
-  // const parseInputData = ;
+  localStorage.setItem('feedback-form-state', JSON.stringify(savedInputData));
 }
 
 function onInputDataExist() {
@@ -33,10 +28,15 @@ function onInputDataExist() {
 
   if (getInputData) {
     const parseGetInputData = JSON.parse(getInputData);
-    // console.log(parseGetInputData);
 
-    form.email.value = parseGetInputData.email;
-    form.message.value = parseGetInputData.message;
+    Object.entries(parseGetInputData).forEach(([key, value]) => {
+      // console.log(key, value);
+      form.elements[key].value = value;
+      localStorage.setItem(
+        'feedback-form-state',
+        JSON.stringify(parseGetInputData)
+      );
+    });
   }
 }
 
@@ -44,5 +44,6 @@ function onFormSumbit(event) {
   event.preventDefault();
   event.currentTarget.reset();
   localStorage.removeItem('feedback-form-state');
+  console.log(savedInputData);
 }
 throttle(onInputFormEvents, 500);
