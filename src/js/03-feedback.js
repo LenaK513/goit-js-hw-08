@@ -11,13 +11,21 @@ form.addEventListener('submit', onFormSumbit);
 onInputDataExist();
 
 function onInputFormEvents(event) {
-  const savedInputData = localStorage.getItem('feedback-form-state');
-  savedInputData = savedInputData ? JSON.parse(savedInputData) : {};
-  dataInput[event.target.name] = event.target.value;
+  let savedInputData = localStorage.getItem('feedback-form-state');
+  if (savedInputData) {
+    savedInputData = JSON.parse(savedInputData);
+  } else {
+    savedInputData = {};
+  }
 
-  localStorage.setItem('feedback-form-state', JSON.stringify(dataInput));
+  savedInputData[event.target.name] = event.target.value;
 
-  const parseInputData = JSON.parse(savedInputData);
+  // localStorage.setItem(
+  //   'feedback-form-statJSON.parse(savedInputData)e',
+  //   JSON.stringify(dataInput)
+  // );
+
+  // const parseInputData = ;
 }
 
 function onInputDataExist() {
@@ -25,6 +33,7 @@ function onInputDataExist() {
 
   if (getInputData) {
     const parseGetInputData = JSON.parse(getInputData);
+    // console.log(parseGetInputData);
 
     form.email.value = parseGetInputData.email;
     form.message.value = parseGetInputData.message;
@@ -35,6 +44,5 @@ function onFormSumbit(event) {
   event.preventDefault();
   event.currentTarget.reset();
   localStorage.removeItem('feedback-form-state');
-  console.log(dataInput);
 }
 throttle(onInputFormEvents, 500);
