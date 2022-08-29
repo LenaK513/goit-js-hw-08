@@ -13,7 +13,6 @@ onInputDataExist();
 function onInputFormEvents(event) {
   savedInputData = localStorage.getItem('feedback-form-state');
   if (savedInputData) {
-    ('feedback-form-state');
     savedInputData = JSON.parse(savedInputData);
   } else {
     savedInputData = {};
