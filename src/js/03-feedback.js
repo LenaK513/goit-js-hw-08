@@ -11,14 +11,13 @@ form.addEventListener('submit', onFormSumbit);
 onInputDataExist();
 
 function onInputFormEvents(event) {
+  const savedInputData = localStorage.getItem('feedback-form-state');
+  savedInputData = savedInputData ? JSON.parse(savedInputData) : {};
   dataInput[event.target.name] = event.target.value;
 
   localStorage.setItem('feedback-form-state', JSON.stringify(dataInput));
 
-  const savedInputData = localStorage.getItem('feedback-form-state');
-
   const parseInputData = JSON.parse(savedInputData);
-  // console.log(parseInputData);
 }
 
 function onInputDataExist() {
@@ -26,12 +25,9 @@ function onInputDataExist() {
 
   if (getInputData) {
     const parseGetInputData = JSON.parse(getInputData);
-    // console.log(parseGetInputData);
 
     form.email.value = parseGetInputData.email;
     form.message.value = parseGetInputData.message;
-    //   console.log(parseGetInputData.email);
-    //   console.log(parseGetInputData.message);
   }
 }
 
